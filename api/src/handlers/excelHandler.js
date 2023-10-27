@@ -1,4 +1,6 @@
-const { extractDataFromWorksheet, getAllComerciosController, getComerciosByCodigoPostal } = require('../controllers/excelController.js');
+const { extractDataFromWorksheet, get } = require('../controllers/excelController/extractDataFromWorksheet.js');
+const { getAllShopsController } = require('../controllers/excelController/getAllShopsController.js');
+const { getShopsByCpController } = require('../controllers/excelController/getShopsByCpController.js');
 
 const extractDataHandler = (req, res) => {
     const workSheet = req.files.file1;
@@ -6,18 +8,18 @@ const extractDataHandler = (req, res) => {
     res.json(data)
 };
 
-const getAllComerciosHandler = async (req, res) => {
+const getAllShopsHandler = async (req, res) => {
     try {
-        const allComercios = await getAllComerciosController();
+        const allComercios = await getAllShopsController();
         res.status(200).send(allComercios);
     } catch (error) {
         res.status(400).send({ error: error.message })
     }
 }
 
-const getComerciobyCodigoPostalHandler = async (req, res) => {
+const getShopsyCplHandler = async (req, res) => {
     try {
-        const comerciosCp = await getComerciosByCodigoPostal(req, res)
+        const comerciosCp = await getShopsByCpController(req, res)
         res.status(200).send(comerciosCp);
     } catch (error) {
         res.status(400).send({ error: error.message });
@@ -25,7 +27,7 @@ const getComerciobyCodigoPostalHandler = async (req, res) => {
 }
 module.exports = {
     extractDataHandler,
-    getAllComerciosHandler,
-    getComerciobyCodigoPostalHandler,
+    getAllShopsHandler,
+    getShopsyCplHandler
 
 };

@@ -1,4 +1,4 @@
-const { User } = require("../db");
+const { User } = require("../../db");
 
 const postUserController = async (Legajo, Email, Nombre, Apellido) => {
     const user = await User.create({ Legajo, Email, Nombre, Apellido });
@@ -14,6 +14,7 @@ const getUserController = async () => {
         throw new Error("Error al obtener usuarios: " + error.message);
     }
 }
+
 
 
 module.exports = { postUserController, getUserController };

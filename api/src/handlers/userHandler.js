@@ -1,4 +1,4 @@
-const { postUserController, getUserController } = require('../controllers/userController.js')
+const { postUserController, getUserController } = require('../controllers/userController/userController.js')
 
 
 const postUserHandlder = async (req, res) => {
