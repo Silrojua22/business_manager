@@ -1,6 +1,6 @@
-const { Router } = require("express");
+const Router = require("express");
 const excelRouter = require("./excelRouter.js");
-const userRouter = require('./userRouter.js')
+const userRouter = require('./userRouter.js');
 const router = Router();
 
 router.use("/nx_data", excelRouter);

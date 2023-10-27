@@ -6,12 +6,12 @@ const postUserController = async (Legajo, Email, Nombre, Apellido) => {
 
 };
 
-const getUserController = async (req, res) => {
+const getUserController = async () => {
     try {
         const user = await User.findAll();
-        return res.status(200).json(user)
+        return user;
     } catch (error) {
-        throw new Error("Error al obtener  Usuarios" + error.message)
+        throw new Error("Error al obtener usuarios: " + error.message);
     }
 }
 

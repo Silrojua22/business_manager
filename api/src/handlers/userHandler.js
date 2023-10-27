@@ -15,10 +15,12 @@ const postUserHandlder = async (req, res) => {
 const getAllUserHandler = async (req, res) => {
     try {
         const allUser = await getUserController();
-        res.status(200).send(allUser);
+        res.status(200).json(allUser);
     } catch (error) {
-        res.status(400).send({ error: error.message })
+        res.status(500).json({ error: error.message });
     }
 }
+
+
 
 module.exports = { postUserHandlder, getAllUserHandler };

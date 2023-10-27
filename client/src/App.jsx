@@ -24,7 +24,7 @@ function App() {
     formData.append("file1", file1);
 
     axios
-      .post("http://localhost:3001/extractData", formData, {
+      .post("http://localhost:3001/nx_data/extractData", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
