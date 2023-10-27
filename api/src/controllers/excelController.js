@@ -70,11 +70,10 @@ const extractDataFromWorksheet = async (fileData) => {
     }
 }
 
-const getAllComerciosController = async () => {
+const getAllComerciosController = async (req, res) => {
     try {
         const allComercios = await Datos.findAll();
-        console.log(allComercios);
-        return allComercios;
+        return res.status(200).json(allComercios);
 
     } catch (error) {
         throw new Error("Error al objetener comercios" + error.message)
