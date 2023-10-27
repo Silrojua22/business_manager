@@ -29,6 +29,10 @@ module.exports = (sequelize) => {
         },
         Calle_Comercio: {
             type: DataTypes.STRING,
+            allowNull: true
+        },
+        Número: {
+            type: DataTypes.INTEGER,
             allowNull: true,
         },
         Nombre_Legal: {

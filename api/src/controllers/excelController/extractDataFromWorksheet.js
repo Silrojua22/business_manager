@@ -23,6 +23,7 @@ const extractDataFromWorksheet = async (fileData) => {
         const prefixIndex = dataAsArray[0].indexOf("Característica");
         const adressIndex = dataAsArray[0].indexOf("Calle_Comercio");
         const nameLegalIndex = dataAsArray[0].indexOf("Nombre_Legal");
+        const numberAdressIndex = dataAsArray[0].indexOf("Número");
 
         const parseInteger = (value) => {
             const parsedValue = parseInt(value, 10);
@@ -41,6 +42,7 @@ const extractDataFromWorksheet = async (fileData) => {
                 Cod_Postal_Legal: postalCodelIndex !== -1 ? parseInteger(row[postalCodelIndex]) : undefined,
                 Teléfono: phoneIndex !== -1 ? `+549${parseInteger(row[prefixIndex])}${parseInteger(row[phoneIndex])}` : undefined,
                 Calle_Comercio: adressIndex !== -1 ? row[adressIndex] : undefined,
+                Número: numberAdressIndex !== -1 ? row[numberAdressIndex] : undefined,
                 Nombre_Legal: nameLegalIndex !== -1 ? row[nameLegalIndex] : undefined,
                 EMAIL: emailIndex !== -1 ? row[emailIndex] : undefined,
             }));
