@@ -1,4 +1,9 @@
-const { postUserController, getUserController } = require('../controllers/userController/userController.js')
+const {
+    postUserController,
+    getUserController,
+    assignFileNumberController,
+    getUserByPkConreoller
+} = require('../controllers/userController/userController.js')
 
 
 const postUserHandlder = async (req, res) => {
@@ -22,5 +27,30 @@ const getAllUserHandler = async (req, res) => {
 }
 
 
+const assignFileNumberHandler = async (req, res) => {
+    try {
+        await assignFileNumberController(req, res);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error en la asignación de usuarios.' });
+    }
+}
 
-module.exports = { postUserHandlder, getAllUserHandler };
+
+const getUserByPkHanlder = async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const user = await getUserByPkConreoller(userId);
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+
+
+module.exports = {
+    postUserHandlder,
+    getAllUserHandler,
+    assignFileNumberHandler,
+    getUserByPkHanlder
+};
