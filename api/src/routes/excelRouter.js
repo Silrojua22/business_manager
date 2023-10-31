@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { extractDataHandler, getAllShopsHandler, getShopsyCplHandler } = require('../handlers/excelHandler');
+const {
+    extractDataHandler,
+    getAllShopsHandler,
+    getShopsyCplHandler
+} = require('../handlers/excelHandler');
 
 router.post('/extractData', extractDataHandler);
 

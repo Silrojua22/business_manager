@@ -43,6 +43,11 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: true,
         },
+        Gestionado: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: "No gestionado",
+        },
 
     },
         { timestamps: false }
