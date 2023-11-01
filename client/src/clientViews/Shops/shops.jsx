@@ -1,5 +1,9 @@
 function Shops() {
-  return <div>Esto es comercios</div>;
+  return (
+    <div>
+      <h1>Esto es comercios</h1>
+    </div>
+  );
 }
 
 export default Shops;

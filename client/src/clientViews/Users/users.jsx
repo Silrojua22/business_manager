@@ -1,5 +1,9 @@
 function Users() {
-  return <div>Estos es usuarios</div>;
+  return (
+    <div>
+      <h1>Esto es Usuarios</h1>
+    </div>
+  );
 }
 
 export default Users;
