@@ -1,4 +1,4 @@
-const { extractDataFromWorksheet, get } = require('../controllers/excelController/extractDataFromWorksheet.js');
+const { extractDataFromWorksheet } = require('../controllers/excelController/extractDataFromWorksheet.js');
 const { getAllShopsController } = require('../controllers/excelController/getAllShopsController.js');
 const { getShopsByCpController } = require('../controllers/excelController/getShopsByCpController.js');
 const { managementController } = require("../controllers/excelController/putShopsManagement.js");
@@ -45,7 +45,7 @@ const getShopsByIdHandler = async (req, res) => {
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
-}
+};
 
 module.exports = {
     extractDataHandler,

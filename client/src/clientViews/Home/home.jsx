@@ -61,24 +61,26 @@ function Home() {
 
   return (
     <div className={styles.container}>
-      <h1>Gestor de comercios</h1>
-      <div className={styles.input}>
-        <div>
-          <input type="file" onChange={handleFile1Change} accept=".xlsx" />
-          {file1 && (
-            <button className={styles.clearButton} onClick={clearFile1}>
-              Quitar
-            </button>
-          )}
+      <div className={styles.div}>
+        <h1>Gestor de comercios</h1>
+        <div className={styles.input}>
+          <div>
+            <input type="file" onChange={handleFile1Change} accept=".xlsx" />
+            {file1 && (
+              <button className={styles.clearButton} onClick={clearFile1}>
+                Quitar
+              </button>
+            )}
+          </div>
         </div>
+        <button className={styles.button} onClick={createDatabase}>
+          Crear Base de Datos
+        </button>
+
+        {loading && <div className={styles.loading}>Cargando...</div>}
+
+        {alertMessage && <div className={styles.alert}>{alertMessage}</div>}
       </div>
-      <button className={styles.button} onClick={createDatabase}>
-        Crear Base de Datos
-      </button>
-
-      {loading && <div className={styles.loading}>Cargando...</div>}
-
-      {alertMessage && <div className={styles.alert}>{alertMessage}</div>}
     </div>
   );
 }
