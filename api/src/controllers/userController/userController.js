@@ -28,7 +28,7 @@ const getUserByPkConreoller = async (userId) => {
 const assignFileNumberController = async (req, res) => {
     try {
         const users = await User.findAll();
-        const unassignedData = await Datos.findAll({ where: { UserId: null } });
+        const unassignedData = await Datos.findAll({ where: { Legajo: null } }); // Filtra por Legajo en lugar de UserId
 
         if (users.length === 0 || unassignedData.length === 0) {
             return res.status(404).json({ message: 'No users or data available for assignment.' });
@@ -42,17 +42,15 @@ const assignFileNumberController = async (req, res) => {
             const dataForUser = unassignedData.slice(dataIndex, dataIndex + dataPerUser);
 
             for (const data of dataForUser) {
-
-                data.UserId = user.id;
+                data.Legajo = user.Legajo;
                 await data.save();
             }
 
             dataIndex += dataPerUser;
         }
 
-
         for (let i = dataIndex; i < unassignedData.length; i++) {
-            unassignedData[i].UserId = users[i % users.length].id;
+            unassignedData[i].Legajo = users[i % users.length].Legajo;
             await unassignedData[i].save();
         }
 
@@ -62,6 +60,7 @@ const assignFileNumberController = async (req, res) => {
         return res.status(500).json({ message: 'Error in user assignment.' });
     }
 }
+
 
 
 

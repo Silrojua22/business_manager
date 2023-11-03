@@ -50,7 +50,7 @@ function Shops() {
         <div className={styles.filter}>
           <span>Filtrar por Código Postal:</span>
           <select
-            value={filtroCodPostal.toString()} // Convierte a cadena
+            value={filtroCodPostal.toString()}
             onChange={(e) => {
               const selectedValue = e.target.value;
               setFiltroCodPostal(
@@ -106,7 +106,7 @@ function Shops() {
               <div>{comercio.Nombre_Legal}</div>
               <div>{comercio.EMAIL}</div>
               <div>{comercio.Gestionado}</div>
-              <div>{comercio.UserId}</div>
+              <div>{comercio.Legajo}</div>
             </div>
           ))}
       </div>

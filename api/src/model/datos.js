@@ -43,6 +43,10 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: true,
         },
+        Legajo: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        },
         Gestionado: {
             type: DataTypes.STRING,
             allowNull: false,
