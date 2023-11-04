@@ -1,3 +1,7 @@
+.h1 {
+  text-align: center;
+}
+
 .tableContainer {
   border-collapse: collapse;
   margin: 25px auto;
@@ -5,16 +9,16 @@
   min-width: 400px;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
-  border: 1px solid #000;
+  border: 1px solid #50007f;
   border-radius: 5px;
   max-width: 1300px;
+  text-align: center; /* Alinea el contenido horizontalmente en el centro */
 }
 
 .tableHeader {
   display: flex;
   background-color: #50007f;
   color: #ffffff;
-
   font-weight: bold;
   padding: 12px 15px;
 }
@@ -23,14 +27,15 @@
   flex: 1;
   padding: 5px;
   font-weight: bold;
-  text-align: left;
+  text-align: center; /* Alinea el texto en el centro horizontalmente */
 }
 
 .row {
-  display: flex;
   border-bottom: 1px solid orangered;
-  padding: 5px;
   background-color: #dbd2e8;
+  display: flex;
+  align-items: center; /* Alinea verticalmente el contenido en cada fila */
+  height: 40px; /* Establece una altura fija para cada fila */
 }
 
 .row div {
@@ -39,15 +44,23 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  transition: all 0.3s;
+  transition: all 0.5s;
   position: relative;
-  text-align: left;
+  text-align: center; /* Alinea el texto en el centro horizontalmente */
 }
 
 .row div:hover {
-  background-color: white;
+  background-color: #dbd2e8;
   overflow: visible;
   white-space: normal;
   width: auto;
   z-index: 1;
+}
+
+.checkboxContainer {
+  display: flex; /* Alinea verticalmente el checkbox con el número de CUIT */
+}
+
+.checkbox {
+  margin-right: 10px; /* Espacio entre el checkbox y el número de CUIT */
 }

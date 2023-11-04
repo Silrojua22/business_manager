@@ -1,8 +1,8 @@
 body {
-  background-color: gray; /* for development */
+  background-color: #dbd2e8; /* for development */
   background-size: cover;
   height: auto;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  font-family: monospace, sans-serif;
+  font-family: Gibson regular, sans-serif;
 }

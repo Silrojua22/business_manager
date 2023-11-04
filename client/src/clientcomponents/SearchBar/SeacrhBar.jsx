@@ -1,10 +1,18 @@
 import { useState } from "react";
 
-function SearchBar({ onSearch }) {
-  const [cuit, setCuit] = useState("");
+function SearchBar(props) {
+  const [searchTerm, setSearchTerm] = useState(props.value || "");
+  const [showWarning, setShowWarning] = useState(false);
 
-  const handleSearch = () => {
-    onSearch(cuit);
+  const handleChange = (e) => {
+    const value = e.target.value;
+    const numericValue = value.replace(/[^0-9]/g, "");
+
+    setSearchTerm(value);
+    props.onSearch(numericValue);
+
+    // Mostrar una advertencia si se ingresan caracteres no numéricos
+    setShowWarning(numericValue !== value);
   };
 
   return (
@@ -12,10 +20,14 @@ function SearchBar({ onSearch }) {
       <input
         type="text"
         placeholder="Buscar por CUIT"
-        value={cuit}
-        onChange={(e) => setCuit(e.target.value)}
+        value={searchTerm}
+        onChange={handleChange}
       />
-      <button onClick={handleSearch}>Buscar</button>
+      {showWarning && (
+        <span style={{ color: "red" }}>
+          Por favor, ingrese solo el número de cuit.
+        </span>
+      )}
     </div>
   );
 }
