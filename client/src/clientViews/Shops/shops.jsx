@@ -73,12 +73,12 @@ function Shops() {
       <div className={styles.tableContainer}>
         <div className={styles.tableHeader}>
           <div>Cuit</div>
-          <div>Número de Comercio</div>
+          <div>N° de Comercio</div>
           <div>Nombre del Comercio</div>
           <div>Nombre del Titular</div>
-          <div>Código Postal Legal</div>
+          <div>C.P.</div>
           <div>Teléfono</div>
-          <div>Calle del Comercio</div>
+          <div>Direccón</div>
           <div>Número</div>
           <div>Nombre Legal</div>
           <div>Email</div>

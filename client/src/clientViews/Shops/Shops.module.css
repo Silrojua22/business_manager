@@ -1,51 +1,53 @@
-/* Shops.module.css */
-
-.h1 {
-  text-align: center;
-}
-
 .tableContainer {
+  border-collapse: collapse;
+  margin: 25px auto;
+  font-size: 0.9em;
+  min-width: 400px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
   border: 1px solid #000;
-  display: flex;
-  flex-direction: column;
+  border-radius: 5px;
+  max-width: 1300px;
 }
 
 .tableHeader {
   display: flex;
-  background-color: #f2f2f2;
-  border-bottom: 1px solid #000;
-  padding: 5px;
+  background-color: #50007f;
+  color: #ffffff;
+
+  font-weight: bold;
+  padding: 12px 15px;
 }
 
-/* Aplicamos un ancho fijo a cada encabezado */
 .tableHeader div {
   flex: 1;
-  min-width: 100px; /* Ajusta el ancho según sea necesario */
   padding: 5px;
   font-weight: bold;
+  text-align: left;
 }
 
 .row {
   display: flex;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid orangered;
   padding: 5px;
+  background-color: #dbd2e8;
 }
 
 .row div {
   flex: 1;
-  min-width: 100px; /* Ajusta el ancho mínimo según sea necesario */
   padding: 5px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  transition: all 0.3s; /* Agregamos una transición para suavizar el efecto */
-  position: relative; /* Agregamos posición relativa para alinear el hover */
+  transition: all 0.3s;
+  position: relative;
+  text-align: left;
 }
 
 .row div:hover {
-  background-color: white; /* Cambiamos el fondo a blanco en el estado hover */
+  background-color: white;
   overflow: visible;
-  white-space: normal; /* Ajusta el texto al contenido sin recortar */
-  width: auto; /* Establece un ancho automático para ajustarse al contenido */
-  z-index: 1; /* Asegura que el hover esté por encima de otras celdas */
+  white-space: normal;
+  width: auto;
+  z-index: 1;
 }
