@@ -24,13 +24,14 @@ const extractDataFromWorksheet = async (fileData) => {
         const adressIndex = dataAsArray[0].indexOf("Calle_Comercio");
         const nameLegalIndex = dataAsArray[0].indexOf("Nombre_Legal");
         const numberAdressIndex = dataAsArray[0].indexOf("Número");
+        const category = dataAsArray[0].indexOf("RUBRO SEMANA NX");
 
         const parseInteger = (value) => {
             const parsedValue = parseInt(value, 10);
             return isNaN(parsedValue) ? undefined : parsedValue;
         };
 
-        const postalCodesToKeep = [1706, 1708, 1712, 1714, 1718, 1722, 1742, 1744];
+        const postalCodesToKeep = [1716, 1718, 1722, 1723, 1727, 1742, 1744, 1746, 1748, 1761, 6700, 1664, 1721, 1749];
 
         const arrayOfObjects = dataAsArray
             .filter(row => postalCodesToKeep.includes(parseInteger(row[postalCodelIndex])))
@@ -45,6 +46,7 @@ const extractDataFromWorksheet = async (fileData) => {
                 Número: numberAdressIndex !== -1 ? row[numberAdressIndex] : undefined,
                 Nombre_Legal: nameLegalIndex !== -1 ? row[nameLegalIndex] : undefined,
                 EMAIL: emailIndex !== -1 ? row[emailIndex] : undefined,
+                Promoción: category !== -1 ? row[category] : undefined,
             }));
 
 

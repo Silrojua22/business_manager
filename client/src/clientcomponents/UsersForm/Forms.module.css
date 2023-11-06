@@ -1,0 +1,35 @@
+/* Estilos para el contenedor del formulario */
+.form-container {
+  text-align: center;
+  margin: 25px auto;
+  max-width: 500px;
+  /* Otros estilos para el contenedor del formulario */
+}
+
+/* Estilos para los campos del formulario */
+.form-field {
+  display: flex;
+  border-bottom: 1px solid orangered;
+  background-color: #dbd2e8;
+  align-items: center;
+  height: 40px;
+  /* Otros estilos para los campos del formulario */
+}
+
+/* Estilos para los campos de entrada de texto */
+.form-field input {
+  flex: 1;
+  padding: 5px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  transition: all 0.5s;
+  position: relative;
+  text-align: center;
+}
+
+/* Estilos para los mensajes de error */
+.error-message {
+  color: red;
+  /* Otros estilos para los mensajes de error */
+}

@@ -96,6 +96,7 @@ function Shops() {
           <div>Número</div>
           <div>Nombre Legal</div>
           <div>Email</div>
+          <div>Promoción</div>
           <div>Gestionado</div>
           <div>Legajo</div>
         </div>
@@ -123,6 +124,7 @@ function Shops() {
             <div>{comercio.Número}</div>
             <div>{comercio.Nombre_Legal}</div>
             <div>{comercio.EMAIL}</div>
+            <div>{comercio.Promoción}</div>
             <div>{comercio.Gestionado}</div>
             <div>{comercio.Legajo}</div>
           </div>
