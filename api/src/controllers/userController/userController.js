@@ -61,6 +61,22 @@ const assignFileNumberController = async (req, res) => {
     }
 }
 
+const getUserByLegajoController = async (legajo) => {
+    try {
+        // Asegúrate de que `legajo` sea un número, no una cadena
+
+        const user = await User.findOne({
+            where: { Legajo: legajo },
+            attributes: ["Legajo", "Email", "Nombre", "Apellido"]
+        });
+
+        return user;
+    } catch (error) {
+        throw error;
+    }
+};
+
+
 
 
 
@@ -70,4 +86,5 @@ module.exports = {
     getUserController,
     assignFileNumberController,
     getUserByPkConreoller,
+    getUserByLegajoController,
 };

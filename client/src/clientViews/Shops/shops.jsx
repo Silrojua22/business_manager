@@ -9,6 +9,8 @@ function Shops() {
   const [filtroCodPostal, setFiltroCodPostal] = useState("Todos");
   const [seleccionados, setSeleccionados] = useState({});
   const [busquedaCuit, setBusquedaCuit] = useState(""); // Agregar estado para la búsqueda por CUIT
+  const [nombreUsuario, setNombreUsuario] = useState("");
+  const [apellidoUsuario, setApellidoUsuario] = useState("");
 
   useEffect(() => {
     async function fetchComercios() {
@@ -33,9 +35,60 @@ function Shops() {
     setSeleccionados((prevSeleccionados) => {
       const newSeleccionados = { ...prevSeleccionados };
       newSeleccionados[index] = !newSeleccionados[index];
+
+      // Acceder a las propiedades del comercio seleccionado
+      const comercioSeleccionado = comercios[index];
+      const telefono = comercioSeleccionado.Teléfono;
+      const email = comercioSeleccionado.EMAIL;
+      const nombreTitular = comercioSeleccionado.Nombre_Titular;
+      const legajo = comercioSeleccionado.Legajo;
+
+      // Realizar acciones basadas en las propiedades del comercio
+      if (newSeleccionados[index]) {
+        console.log("Comercio seleccionado:");
+        console.log("Teléfono:", telefono);
+        console.log("Email:", email);
+        console.log("Nombre del Titular:", nombreTitular);
+        console.log("Legajo", legajo);
+
+        // Realiza aquí las acciones que desees con estas propiedades
+
+        // Realizar una solicitud para buscar el usuario por ID usando tu API
+        const buscarUsuario = async () => {
+          try {
+            const response = await axios.get(
+              `http://localhost:3001/user/user_legajo/${legajo}`
+            );
+
+            const usuario = response.data;
+
+            if (usuario) {
+              // Si se encuentra el usuario, guardar Nombre y Apellido en las propiedades del comercio seleccionado
+              comercioSeleccionado.NombreUsuario = usuario.Nombre;
+              comercioSeleccionado.ApellidoUsuario = usuario.Apellido;
+
+              // Imprime el nombre y apellido del usuario en la consola
+              console.log("Nombre del Usuario:", usuario.Nombre);
+              console.log("Apellido del Usuario:", usuario.Apellido);
+            } else {
+              setNombreUsuario("");
+              setApellidoUsuario("");
+            }
+          } catch (error) {
+            console.error("Error al buscar usuario por ID:", error);
+          }
+        };
+
+        buscarUsuario();
+      } else {
+        // Realizar acciones cuando el comercio deja de estar seleccionado
+      }
+
       return newSeleccionados;
     });
   };
+
+  // ... (código posterior)
 
   const filterComercios = () => {
     return comercios.filter((comercio) => {
@@ -109,6 +162,7 @@ function Shops() {
                 checked={seleccionados[index] || false}
                 onChange={() => toggleSeleccion(index)}
               />
+
               {seleccionados[index] ? (
                 <button>Enviar</button>
               ) : (

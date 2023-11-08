@@ -2,7 +2,8 @@ const {
     postUserController,
     getUserController,
     assignFileNumberController,
-    getUserByPkConreoller
+    getUserByPkConreoller,
+    getUserByLegajoController,
 } = require('../controllers/userController/userController.js')
 
 
@@ -47,10 +48,37 @@ const getUserByPkHanlder = async (req, res) => {
     }
 }
 
+const getUserByLegajoHandler = async (req, res) => {
+    try {
+        const { userLegajo } = req.params;
+
+        // Verificar que userLegajo sea un número válido
+        const legajo = parseInt(userLegajo, 10); // Intenta convertir a un número entero
+
+        if (isNaN(legajo)) {
+            res.status(400).json({ message: "El legajo no es un número válido" });
+            return; // Sale de la función si no es un número válido
+        }
+
+        const user = await getUserByLegajoController(legajo);
+
+        if (user) {
+            res.status(200).json(user);
+        } else {
+            res.status(404).json({ message: "Colaborador no encontrado" });
+        }
+    } catch (error) {
+        console.error("Error al buscar usuario por legajo:", error);
+        res.status(500).json({ error: "Error en el servidor" });
+    }
+};
+
+
 
 module.exports = {
     postUserHandlder,
     getAllUserHandler,
     assignFileNumberHandler,
-    getUserByPkHanlder
+    getUserByPkHanlder,
+    getUserByLegajoHandler
 };
