@@ -87,6 +87,75 @@ function Shops() {
       return newSeleccionados;
     });
   };
+  function createMessage(nombreTitular, nombreUsuario, apellidoUsuario) {
+    const mensaje = `Hola ${nombreTitular}, 
+    te informamos que ${nombreUsuario} ${apellidoUsuario} ha realizado una acción en nuestra plataforma.`;
+    console.log("Mensaje predeterminado:", mensaje);
+    return mensaje;
+  }
+
+  function generateWhatsAppURL(phoneNumber, message) {
+    const formattedPhoneNumber = phoneNumber.replace(/\D/g, "");
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappURL = `https://wa.me/${formattedPhoneNumber}?text=${encodedMessage}`;
+    return whatsappURL;
+  }
+
+  const sendMessageToComercio = async (comercio) => {
+    const mensajePredeterminado = createMessage(
+      comercio.Nombre_Titular,
+      nombreUsuario,
+      apellidoUsuario
+    );
+
+    const formattedPhoneNumber = comercio.Teléfono.replace(/\D/g, "");
+
+    if (
+      formattedPhoneNumber.length >= 10 &&
+      formattedPhoneNumber.length <= 15
+    ) {
+      const whatsappURL = generateWhatsAppURL(
+        comercio.Teléfono,
+        mensajePredeterminado
+      );
+
+      // Intenta abrir la URL de WhatsApp en una nueva ventana o pestaña
+      const whatsappWindow = window.open(whatsappURL, "_blank");
+
+      if (whatsappWindow) {
+        try {
+          await axios.put(
+            `http://localhost:3001/nx_data/gestion/${comercio.id}`
+          );
+
+          // Actualiza el estado del comercio a "Gestionado"
+          await updateComercioEstado(comercio.id, "Gestionado");
+          alert("El estado se ha modificado a Gestionado con éxito.");
+        } catch (error) {
+          console.error("Error al cambiar el estado del comercio:", error);
+          alert("Error al cambiar el estado del comercio.");
+        }
+      } else {
+        alert("No se pudo abrir la URL de WhatsApp.");
+      }
+    } else {
+      alert("El número de teléfono es incorrecto.");
+    }
+  };
+
+  function updateComercioEstado(comercioId, nuevoEstado) {
+    setComercios((prevComercios) => {
+      return prevComercios.map((comercio) => {
+        if (comercio.id === comercioId) {
+          return {
+            ...comercio,
+            Gestionado: nuevoEstado,
+          };
+        }
+        return comercio;
+      });
+    });
+  }
 
   // ... (código posterior)
 
@@ -164,7 +233,9 @@ function Shops() {
               />
 
               {seleccionados[index] ? (
-                <button>Enviar</button>
+                <button onClick={() => sendMessageToComercio(comercio)}>
+                  Enviar
+                </button>
               ) : (
                 <div>{comercio.Cuit}</div>
               )}

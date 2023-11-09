@@ -25,7 +25,7 @@ const processDataRow = (row, headerRow, postalCodesToKeep) => {
         Nombre_Comercio: row[2],
         Nombre_Titular: row[6],
         Cod_Postal_Legal: postalCodeIndex !== -1 ? parseInteger(row[postalCodeIndex]) : undefined,
-        Teléfono: phoneIndex !== -1 ? `+549${parseInteger(row[prefixIndex])}${parseInteger(row[phoneIndex])}` : undefined,
+        Teléfono: phoneIndex !== -1 ? `+54${parseInteger(row[prefixIndex])}${parseInteger(row[phoneIndex])}` : undefined,
         Calle_Comercio: addressIndex !== -1 ? row[addressIndex] : undefined,
         Número: numberAddressIndex !== -1 ? row[numberAddressIndex] : undefined,
         Nombre_Legal: nameLegalIndex !== -1 ? row[nameLegalIndex] : undefined,
@@ -73,7 +73,7 @@ const extractDataFromWorksheet = async (fileData) => {
         const postalCodesToKeep = [1716, 1718, 1722, 1723, 1727, 1742, 1744, 1746, 1748, 1761, 6700, 1664, 1721, 1749];
 
         const filteredData = dataAsArray
-            .slice(1) // Exclude the header row
+            .slice(1)
             .map((row) => processDataRow(row, headerRow, postalCodesToKeep))
             .filter((row) => row !== null);
 
