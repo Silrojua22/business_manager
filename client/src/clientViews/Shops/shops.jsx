@@ -8,7 +8,7 @@ function Shops() {
   const [filtroGestionado, setFiltroGestionado] = useState("Todos");
   const [filtroCodPostal, setFiltroCodPostal] = useState("Todos");
   const [seleccionados, setSeleccionados] = useState({});
-  const [busquedaCuit, setBusquedaCuit] = useState(""); // Agregar estado para la búsqueda por CUIT
+  const [busquedaCuit, setBusquedaCuit] = useState("");
   const [nombreUsuario, setNombreUsuario] = useState("");
   const [apellidoUsuario, setApellidoUsuario] = useState("");
 
@@ -28,7 +28,7 @@ function Shops() {
   }, []);
 
   const handleSearchByCuit = (cuit) => {
-    setBusquedaCuit(cuit); // Actualizar el estado de búsqueda por CUIT
+    setBusquedaCuit(cuit);
   };
 
   const toggleSeleccion = (index) => {
@@ -36,14 +36,12 @@ function Shops() {
       const newSeleccionados = { ...prevSeleccionados };
       newSeleccionados[index] = !newSeleccionados[index];
 
-      // Acceder a las propiedades del comercio seleccionado
       const comercioSeleccionado = comercios[index];
       const telefono = comercioSeleccionado.Teléfono;
       const email = comercioSeleccionado.EMAIL;
-      const nombreTitular = comercioSeleccionado.Nombre_Titular;
+      const nombreTitular = comercioSeleccionado.Nombre_Legal;
       const legajo = comercioSeleccionado.Legajo;
 
-      // Realizar acciones basadas en las propiedades del comercio
       if (newSeleccionados[index]) {
         console.log("Comercio seleccionado:");
         console.log("Teléfono:", telefono);
@@ -51,9 +49,6 @@ function Shops() {
         console.log("Nombre del Titular:", nombreTitular);
         console.log("Legajo", legajo);
 
-        // Realiza aquí las acciones que desees con estas propiedades
-
-        // Realizar una solicitud para buscar el usuario por ID usando tu API
         const buscarUsuario = async () => {
           try {
             const response = await axios.get(
@@ -63,15 +58,13 @@ function Shops() {
             const usuario = response.data;
 
             if (usuario) {
-              // Si se encuentra el usuario, guardar Nombre y Apellido en las propiedades del comercio seleccionado
-              comercioSeleccionado.NombreUsuario = usuario.Nombre;
-              comercioSeleccionado.ApellidoUsuario = usuario.Apellido;
+              setNombreUsuario(usuario.Nombre);
+              setApellidoUsuario(usuario.Apellido);
 
-              // Imprime el nombre y apellido del usuario en la consola
               console.log("Nombre del Usuario:", usuario.Nombre);
               console.log("Apellido del Usuario:", usuario.Apellido);
             } else {
-              setNombreUsuario("");
+              setNombreUsuario(""); // Restablecer a vacío si no se encuentra el usuario
               setApellidoUsuario("");
             }
           } catch (error) {
@@ -80,16 +73,14 @@ function Shops() {
         };
 
         buscarUsuario();
-      } else {
-        // Realizar acciones cuando el comercio deja de estar seleccionado
       }
-
       return newSeleccionados;
     });
   };
-  function createMessage(nombreTitular, nombreUsuario, apellidoUsuario) {
+
+  function createMessage(nombreTitular) {
     const mensaje = `Hola ${nombreTitular}, 
-    te informamos que ${nombreUsuario} ${apellidoUsuario} ha realizado una acción en nuestra plataforma.`;
+      te informamos que ${nombreUsuario} ${apellidoUsuario} ha realizado una acción en nuestra plataforma.`;
     console.log("Mensaje predeterminado:", mensaje);
     return mensaje;
   }
@@ -103,23 +94,22 @@ function Shops() {
 
   const sendMessageToComercio = async (comercio) => {
     const mensajePredeterminado = createMessage(
-      comercio.Nombre_Titular,
+      comercio.Nombre_Legal,
       nombreUsuario,
       apellidoUsuario
     );
 
     const formattedPhoneNumber = comercio.Teléfono.replace(/\D/g, "");
 
-    if (
-      formattedPhoneNumber.length >= 10 &&
-      formattedPhoneNumber.length <= 15
-    ) {
+    // Expresión regular para validar el formato del número de teléfono
+    const phoneNumberRegex = /^[0-9]{10,15}$/;
+
+    if (phoneNumberRegex.test(formattedPhoneNumber)) {
       const whatsappURL = generateWhatsAppURL(
         comercio.Teléfono,
         mensajePredeterminado
       );
 
-      // Intenta abrir la URL de WhatsApp en una nueva ventana o pestaña
       const whatsappWindow = window.open(whatsappURL, "_blank");
 
       if (whatsappWindow) {
@@ -128,7 +118,6 @@ function Shops() {
             `http://localhost:3001/nx_data/gestion/${comercio.id}`
           );
 
-          // Actualiza el estado del comercio a "Gestionado"
           await updateComercioEstado(comercio.id, "Gestionado");
           alert("El estado se ha modificado a Gestionado con éxito.");
         } catch (error) {
@@ -139,6 +128,7 @@ function Shops() {
         alert("No se pudo abrir la URL de WhatsApp.");
       }
     } else {
+      // Mostrar alerta solo si el número de teléfono es incorrecto
       alert("El número de teléfono es incorrecto.");
     }
   };
@@ -157,15 +147,13 @@ function Shops() {
     });
   }
 
-  // ... (código posterior)
-
   const filterComercios = () => {
     return comercios.filter((comercio) => {
       return (
         (filtroGestionado === "Todos" ||
           comercio.Gestionado === filtroGestionado) &&
         (filtroCodPostal === "Todos" ||
-          comercio.Cod_Postal_Legal === Number(filtroCodPostal)) &&
+          comercio.Cod_Postal_Legal.toString() === filtroCodPostal) &&
         (busquedaCuit === "" || comercio.Cuit.includes(busquedaCuit))
       );
     });
@@ -175,7 +163,6 @@ function Shops() {
     <div>
       <h1 className={styles.h1}>Comercios</h1>
       <SearchBar onSearch={handleSearchByCuit} value={busquedaCuit} />{" "}
-      {/* Pasar el valor de búsqueda por CUIT */}
       <div className={styles.filters}>
         <div className={styles.filter}>
           <span>Filtrar por Gestión:</span>
