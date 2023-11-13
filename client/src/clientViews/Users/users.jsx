@@ -7,7 +7,9 @@ function Users() {
     <div>
       <h1 className={styles.h1}>Gestor de Colaboradores</h1>
       <UserForm />
-      <AssingUser />
+      <div className={styles.AssingUser}>
+        <AssingUser />
+      </div>
     </div>
   );
 }
