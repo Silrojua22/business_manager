@@ -9,14 +9,25 @@ const {
 
 const postUserHandlder = async (req, res) => {
     try {
-        const { Legajo, Email, Nombre, Apellido } = req.body;
-        const user = await postUserController(Legajo, Email, Nombre, Apellido);
+        const { legajo, email, nombre, apellido } = req.body;
+
+        // Verificar si ya existe un usuario con el mismo Legajo
+        const existingUser = await getUserByLegajoController(legajo);
+
+        if (existingUser) {
+            return res.status(400).json({ error: `El usuario con Legajo ${legajo} ya existe` });
+        }
+
+        // Si no existe, procede con la creación del usuario
+        const user = await postUserController({ legajo, email, nombre, apellido });
         res.status(201).json(user);
     } catch (error) {
         console.error('Error al crear usuario:', error);
         res.status(500).json({ error: 'Hubo un problema al crear el usuario' });
     }
 };
+
+
 
 const getAllUserHandler = async (req, res) => {
     try {

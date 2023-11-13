@@ -1,10 +1,15 @@
 const { User, Datos } = require("../../db");
 
-const postUserController = async (Legajo, Email, Nombre, Apellido) => {
-    const user = await User.create({ Legajo, Email, Nombre, Apellido });
+const postUserController = async ({ legajo, email, nombre, apellido }) => {
+    const user = await User.create({
+        Legajo: legajo,
+        Email: email,
+        Nombre: nombre,
+        Apellido: apellido
+    });
     return user.dataValues;
-
 };
+
 
 const getUserController = async () => {
     try {

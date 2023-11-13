@@ -64,7 +64,7 @@ function Shops() {
               console.log("Nombre del Usuario:", usuario.Nombre);
               console.log("Apellido del Usuario:", usuario.Apellido);
             } else {
-              setNombreUsuario(""); // Restablecer a vacío si no se encuentra el usuario
+              setNombreUsuario("");
               setApellidoUsuario("");
             }
           } catch (error) {
@@ -101,7 +101,6 @@ function Shops() {
 
     const formattedPhoneNumber = comercio.Teléfono.replace(/\D/g, "");
 
-    // Expresión regular para validar el formato del número de teléfono
     const phoneNumberRegex = /^[0-9]{10,15}$/;
 
     if (phoneNumberRegex.test(formattedPhoneNumber)) {
@@ -182,14 +181,20 @@ function Shops() {
             onChange={(e) => setFiltroCodPostal(e.target.value)}
           >
             <option value="Todos">Todos</option>
-            <option value="1706">1706</option>
-            <option value="1708">1708</option>
-            <option value="1712">1712</option>
-            <option value="1714">1714</option>
+            <option value="1716">1716</option>
             <option value="1718">1718</option>
             <option value="1722">1722</option>
+            <option value="1723">1723</option>
+            <option value="1727">1727</option>
             <option value="1742">1742</option>
             <option value="1744">1744</option>
+            <option value="1746">1746</option>
+            <option value="1748">1748</option>
+            <option value="1761">1761</option>
+            <option value="6700">6700</option>
+            <option value="1664">1664</option>
+            <option value="1721">1721</option>
+            <option value="1749">1749</option>
           </select>
         </div>
       </div>
