@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./Shops.module.css";
 import SearchBar from "../../clientcomponents/SearchBar/SeacrhBar.jsx";
+import * as XLSX from "xlsx";
 
 function Shops() {
   const [comercios, setComercios] = useState([]);
@@ -79,8 +80,11 @@ function Shops() {
   };
 
   function createMessage(nombreTitular) {
-    const mensaje = `Hola ${nombreTitular}, 
-      te informamos que ${nombreUsuario} ${apellidoUsuario} ha realizado una acción en nuestra plataforma.`;
+    const mensaje = `Hola ${nombreTitular} Soy ${nombreUsuario} ${apellidoUsuario}, colaborador de Naranja X 
+    ¿Queremos saber cómo te fue con la activación de tu Toque/QR?
+    Vimos que todavía no realizaste ventas, ¿tenes alguna duda o consulta que quieras realizarme?
+    También podés acercarte a nuestra sucursal de Merlo y te estaremos ayudando.
+    Aquí tienes algunas imágenes para referencia`;
     console.log("Mensaje predeterminado:", mensaje);
     return mensaje;
   }
@@ -158,6 +162,37 @@ function Shops() {
     });
   };
 
+  const exportToExcel = () => {
+    const filteredComercios = filterComercios();
+
+    // Crear un objeto de datos para el archivo Excel
+    const excelData = filteredComercios.map((comercio) => ({
+      Cuit: comercio.Cuit,
+      Numero_de_Comercio: comercio.Numero_de_Comercio,
+      Nombre_Comercio: comercio.Nombre_Comercio,
+      Nombre_Titular: comercio.Nombre_Titular,
+      Cod_Postal_Legal: comercio.Cod_Postal_Legal,
+      Teléfono: comercio.Teléfono,
+      Calle_Comercio: comercio.Calle_Comercio,
+      Número: comercio.Número,
+      Nombre_Legal: comercio.Nombre_Legal,
+      EMAIL: comercio.EMAIL,
+      Promoción: comercio.Promoción,
+      Gestionado: comercio.Gestionado,
+      Legajo: comercio.Legajo,
+    }));
+
+    // Crear un libro de trabajo de Excel
+    const workbook = XLSX.utils.book_new();
+    const worksheet = XLSX.utils.json_to_sheet(excelData);
+
+    // Añadir la hoja de trabajo al libro
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Comercios");
+
+    // Guardar el libro como un archivo Excel
+    XLSX.writeFile(workbook, "comercios.xlsx");
+  };
+
   return (
     <div>
       <h1 className={styles.h1}>Comercios</h1>
@@ -173,6 +208,9 @@ function Shops() {
             <option value="No gestionado">No gestionado</option>
             <option value="Gestionado">Gestionado</option>
           </select>
+        </div>
+        <div>
+          <button onClick={exportToExcel}>Exportar a Excel</button>
         </div>
         <div className={styles.filter}>
           <span>Filtrar por Código Postal:</span>

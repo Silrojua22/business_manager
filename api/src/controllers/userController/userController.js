@@ -64,12 +64,10 @@ const assignFileNumberController = async (req, res) => {
         console.error(error);
         return res.status(500).json({ message: 'Error in user assignment.' });
     }
-}
+};
 
 const getUserByLegajoController = async (legajo) => {
     try {
-        // Asegúrate de que `legajo` sea un número, no una cadena
-
         const user = await User.findOne({
             where: { Legajo: legajo },
             attributes: ["Legajo", "Email", "Nombre", "Apellido"]
