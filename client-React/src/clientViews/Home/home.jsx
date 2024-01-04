@@ -4,6 +4,7 @@ import axios from "axios";
 
 function Home() {
   const [file1, setFile1] = useState(null);
+  console.log(file1);
   const [loading, setLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
 

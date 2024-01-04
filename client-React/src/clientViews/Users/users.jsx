@@ -1,7 +1,7 @@
 import UserForm from "../../clientcomponents/UsersForm/UserForm.jsx";
 import AssingUser from "../../clientcomponents/AssingUser/AssingUser.jsx";
-import UserList from "../../clientcomponents/UserList/userList.jsx";
 import styles from "./UserForm.module.css";
+import UserList from "../../clientcomponents/UserList/userList.jsx";
 
 function Users() {
   return (
