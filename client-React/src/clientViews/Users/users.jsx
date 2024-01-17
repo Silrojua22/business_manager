@@ -11,7 +11,8 @@ function Users() {
       <div className={styles.AssingUser}>
         <AssingUser />
       </div>
-      <div>
+      <hr />
+      <div className={styles.userListContainer}>
         <UserList />
       </div>
     </div>

@@ -5,3 +5,10 @@ h1 {
 .AssingUser {
   text-align: center;
 }
+
+.userListContainer {
+  margin-top: 20px; /* Ajusta según sea necesario */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}

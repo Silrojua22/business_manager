@@ -1,0 +1,58 @@
+.userListTitle {
+  text-align: center;
+}
+
+.tableContainer {
+  border-collapse: collapse;
+  margin: 25px auto;
+  font-size: 0.9em;
+  min-width: 400px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
+  border: 1px solid #50007f;
+  border-radius: 5px;
+  max-width: 1300px;
+  text-align: center;
+}
+
+.tableHeader {
+  display: flex;
+  background-color: #50007f;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 12px 15px;
+}
+
+.tableHeader div {
+  flex: 1;
+  padding: 5px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.row {
+  border-bottom: 1px solid orangered;
+  background-color: #dbd2e8;
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+
+.row div {
+  flex: 1;
+  padding: 5px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  transition: all 0.5s;
+  position: relative;
+  text-align: center;
+}
+
+.row div:hover {
+  background-color: #dbd2e8;
+  overflow: visible;
+  white-space: normal;
+  width: auto;
+  z-index: 1;
+}
